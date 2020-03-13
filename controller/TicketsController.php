@@ -25,7 +25,7 @@
         require_once ('../model/TicketsModel.php');
         require_once ('../dao/TicketsDAO.php');
         require_once ('../database/Database.php');
-        require_once("../controller/Util.php");
+        require_once ("../controller/Util.php");
 
         //Cria uma nova instância da classe Util
         $Util = new Util();
@@ -39,15 +39,15 @@
         //Obtém os dados do formulário de cadastro
         $titleTicket = $_POST['titleTicket'];
         $descriptionTicket = $_POST['descriptionTicket'];
-        $statusTitle = $_POST['statusTitle'];
-        $dataTicket = $Util->inverteDate($_POST['dataTicket']);
+        $statusTicket = $_POST['statusTicket'];
+        $dateTicket = $_POST['dateTicket'];
 
         // Instancia um novo objeto do tipo Ticket e seta os dados
         $Tickets = new Tickets();
         $Tickets->setTitleTicket($titleTicket);
         $Tickets->setDescriptionTicket($descriptionTicket);
-        $Tickets->setStatusTicket($statusTitle);
-        $Tickets->setDateTicket($dataTicket);
+        $Tickets->setStatusTicket($statusTicket);
+        $Tickets->setDateTicket($dateTicket);
 
         // Passa o obejto Ticket para a função add no TicketsDAO
         $dao->add($Tickets);
@@ -60,7 +60,7 @@
         require_once ('../model/TicketsModel.php');
         require_once ('../dao/TicketsDAO.php');
         require_once ('../database/Database.php');
-        require_once("../controller/Util.php");
+        require_once ("../controller/Util.php");
         
         //Cria uma nova instância da classe Util
         $Util = new Util();
@@ -75,16 +75,16 @@
         $codTicket = $_POST['codTicket'];
         $titleTicket = $_POST['titleTicket'];
         $descriptionTicket = $_POST['descriptionTicket'];
-        $statusTitle = $_POST['statusTitle'];
-        $dataTicket = $Util->inverteDate($_POST['dataTicket']);
+        $statusTicket = $_POST['statusTicket'];
+        $dateTicket = $_POST['dateTicket'];
 
         // Instancia um novo objeto do tipo Ticket e seta os dados
         $Tickets = new Tickets();
         $Tickets->setCodTicket($codTicket);
         $Tickets->setTitleTicket($titleTicket);
         $Tickets->setDescriptionTicket($descriptionTicket);
-        $Tickets->setStatusTicket($statusTitle);
-        $Tickets->setDateTicket($dataTicket);
+        $Tickets->setStatusTicket($statusTicket);
+        $Tickets->setDateTicket($dateTicket);
 
         // Passa o obejto Ticket para a função update no TicketsDAO
         $dao->update($Tickets);

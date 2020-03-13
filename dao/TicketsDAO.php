@@ -45,7 +45,7 @@
                     echo
                         "<script>
                             alert('Ticket cadastrado com sucesso!');
-                            window.location.href='../View/ViewListarTickets.php';
+                            window.location.href='../view/listar-tickets.php';
                         </script>";
 
                 // Se e instrução não for executada com sucesso exibe a mensagem na tela e redireciona para a página de listagem de Tickets

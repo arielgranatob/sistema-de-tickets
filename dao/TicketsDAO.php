@@ -1,152 +1,155 @@
 <?php
 
-    require_once('../database/database.php');
-    
-    class TicketsDAO {
+require_once('../database/database.php');
 
-        private $conn;
+class TicketsDAO
+{
 
-        // Faz contrução da classe TicketsDAO juntamente com a instância da classe Database
-        public function __construct() {
-            $database = new Database();
-            $db = $database->dbConnection();
-            $this->conn = $db;
-        }
+    private $conn;
 
-        // Função para executar instruções SQL desejadas
-        public function runQuery($sql) {
+    // Faz contrução da classe TicketsDAO juntamente com a instância da classe Database
+    public function __construct()
+    {
+        $database = new Database();
+        $db = $database->dbConnection();
+        $this->conn = $db;
+    }
+
+    // Função para executar instruções SQL desejadas
+    public function runQuery($sql)
+    {
+
+        // Prepara uma instrução SQL para ser executada pelo método PDOStatement :: execute ()
+        $stmt = $this->conn->prepare($sql);
+        return $stmt;
+    }
+
+    // Função para adicionar Tickets
+    public function add(Tickets $Tickets)
+    {
+        try {
+            // Recebe os dados de um Ticket que foram setados no TicketsController
+            $titleTicket = $Tickets->getTitleTicket();
+            $descriptionTicket = $Tickets->getDescriptionTicket();
+            $dataTicket = $Tickets->getDataTicket();
+            $statusTicket = $Tickets->getStatusTicket();
+            $idUser = $Tickets->getIdUser();
+
 
             // Prepara uma instrução SQL para ser executada pelo método PDOStatement :: execute ()
-            $stmt = $this->conn->prepare($sql);
-            return $stmt;
-        }
+            $stmt = $this->conn->prepare("INSERT INTO tickets (titleTicket, dataTicket, descriptionTicket, statusTicket, idUser) VALUES(:titleTicket, :dataTicket, :descriptionTicket, :statusTicket, :idUser)");
 
-        // Função para adicionar Tickets
-        public function add(Tickets $Tickets) {
-            try {
+            // Passa os parâmetros para a instrução SQL
+            $stmt->bindparam(":titleTicket", $titleTicket, PDO::PARAM_STR);
+            $stmt->bindparam(":descriptionTicket", $descriptionTicket, PDO::PARAM_STR);
+            $stmt->bindparam(":dataTicket", $dataTicket, PDO::PARAM_STR);
+            $stmt->bindparam(":statusTicket", $statusTicket, PDO::PARAM_STR);
+            $stmt->bindparam(":idUser", $idUser, PDO::PARAM_STR);
 
-                // Recebe os dados de um Ticket que foram setados no TicketsController
-                $titleTicket = $Tickets->getTitleTicket();
-                $descriptionTicket = $Tickets->getDescriptionTicket();
-                $dateTicket = $Tickets->getDateTicket();
-                $statusTicket = $Tickets->getStatusTicket();
 
-                // Prepara uma instrução SQL para ser executada pelo método PDOStatement :: execute ()
-                $stmt = $this->conn->prepare("INSERT INTO Tickets(titleTicket, descriptionTicket, dateTicket, statusTicket) VALUES(:titleTicket, :descriptionTicket, :dateTicket, :statusTicket)");
-
-                // Passa os parâmetros para a instrução SQL
-                $stmt->bindparam(":titleTicket", $titleTicket, PDO::PARAM_STR);
-                $stmt->bindparam(":descriptionTicket", $descriptionTicket, PDO::PARAM_STR);
-                $stmt->bindparam(":dateTicket", $dateTicket, PDO::PARAM_STR);
-                $stmt->bindparam(":statusTicket", $statusTicket, PDO::PARAM_STR);
-
-                // Executa uma instrução preparada e se e instrução for executada com sucesso exibe a mensagem na tela e redireciona para a página de listagem de Tickets
-                if ($stmt->execute()) {
-                    echo
-                        "<script>
+            // Executa uma instrução preparada e se e instrução for executada com sucesso exibe a mensagem na tela e redireciona para a página de listagem de Tickets
+            if ($stmt->execute()) {
+                echo
+                    "<script>
                             alert('Ticket cadastrado com sucesso!');
                             window.location.href='../view/listar-tickets.php';
                         </script>";
 
                 // Se e instrução não for executada com sucesso exibe a mensagem na tela e redireciona para a página de listagem de Tickets
-                } else {
-                    echo 
-                        "<script>
+            } else {
+                echo
+                    "<script>
                             alert('Erro ao cadastrar a Ticket!');
                             window.location.href='../View/ViewListarTickets.php';
                         </script>";
-                }
-
-            } catch (PDOException $e) {
-                
-                // Caso alguma exceção ou erro, os mesmos serão mostrados na tela
-                echo $e->getMessage();
-
             }
+        } catch (PDOException $e) {
+
+            // Caso alguma exceção ou erro, os mesmos serão mostrados na tela
+            echo $e->getMessage();
         }
+    }
 
-        // Função para editar os dados de Tickets
-        public function update(Tickets $Tickets) {
-            try {
-                
-                // Recebe os dados de uma Ticket que foram setados no TicketsController
-                $codTicket = $Tickets->getCodTicket();
-                $titleTicket = $Tickets->getTitleTicket();
-                $descriptionTicket = $Tickets->getDescriptionTicket();
-                $dateTicket = $Tickets->getDateTicket();
-                $statusTicket = $Tickets->getStatusTicket();
+    // Função para editar os dados de Tickets
+    public function update(Tickets $Tickets)
+    {
+        try {
 
-                // Prepara uma instrução SQL para ser executada pelo método PDOStatement :: execute ()
-                $stmt = $this->conn->prepare("UPDATE Tickets SET titleTicket = ?, descriptionTicket = ?, dateTicket = ?, emailTicket = ? WHERE codTicket = ?");
+            // Recebe os dados de uma Ticket que foram setados no TicketsController
+            $idTicket = $Tickets->getIdTicket();
+            $titleTicket = $Tickets->getTitleTicket();
+            $descriptionTicket = $Tickets->getDescriptionTicket();
+            $dataTicket = $Tickets->getDataTicket();
+            $statusTicket = $Tickets->getStatusTicket();
 
-                // Passa os parâmetros para a instrução SQL
-                $stmt->bindparam(1, $titleTicket, PDO::PARAM_STR);
-                $stmt->bindparam(2, $descriptionTicket, PDO::PARAM_STR);
-                $stmt->bindparam(3, $dateTicket, PDO::PARAM_STR);
-                $stmt->bindparam(4, $statusTicket, PDO::PARAM_STR);
-                $stmt->bindparam(5, $codTicket, PDO::PARAM_INT);
+            // Prepara uma instrução SQL para ser executada pelo método PDOStatement :: execute ()
+            $stmt = $this->conn->prepare("UPDATE Tickets SET titleTicket = ?, descriptionTicket = ?, dataTicket = ?, statusTicket = ?, idUser = ? WHERE idTicket = ?");
 
-                // Executa uma instrução preparada e se e instrução for executada com sucesso exibe a mensagem na tela e redireciona para a página de listagem de Tickets
-                if ($stmt->execute()){
-                    echo 
-                        "<script>
+            // Passa os parâmetros para a instrução SQL
+            $stmt->bindparam(1, $titleTicket, PDO::PARAM_STR);
+            $stmt->bindparam(2, $descriptionTicket, PDO::PARAM_STR);
+            $stmt->bindparam(3, $dataTicket, PDO::PARAM_STR);
+            $stmt->bindparam(4, $statusTicket, PDO::PARAM_STR);
+            $stmt->bindparam(5, $idTicket, PDO::PARAM_INT);
+            $stmt->bindparam(6, $idUser, PDO::PARAM_INT);
+
+            // Executa uma instrução preparada e se e instrução for executada com sucesso exibe a mensagem na tela e redireciona para a página de listagem de Tickets
+            if ($stmt->execute()) {
+                echo
+                    "<script>
                             alert('Dados da Ticket alterados com sucesso!');
                             window.location.href='../View/ViewListarTickets.php';
                         </script>";
 
                 // Se e instrução não for executada com sucesso exibe a mensagem na tela e redireciona para a página de listagem de Tickets
-                } else {
-                    echo 
-                        "<script>
+            } else {
+                echo
+                    "<script>
                             alert('Erro ao alterar dos dados da Ticket!');
                             window.location.href='../View/ViewListarTickets.php';
                         </script>";
-                }
-
-            } catch (PDOException $e) {
-
-                // Caso alguma exceção ou erro, os mesmos serão mostrados na tela
-                echo $e->getMessage();
-
             }
+        } catch (PDOException $e) {
+
+            // Caso alguma exceção ou erro, os mesmos serão mostrados na tela
+            echo $e->getMessage();
         }
-        
-        // Função para excluir Tickets
-        public function delete(Tickets $Tickets) {
-            try {
-                
-                // Recebe os dados de uma Ticket que foram setados no TicketsController
-                $codTicket = $Tickets->getCodTicket();
+    }
 
-                // Prepara uma instrução SQL para ser executada pelo método PDOStatement :: execute ()
-                $stmt = $this->conn->prepare("DELETE FROM Tickets WHERE codTicket = ?");
+    // Função para excluir Tickets
+    public function delete(Tickets $Tickets)
+    {
+        try {
 
-                // Passa os parâmetros para a instrução SQL
-                $stmt->bindparam(1, $codTicket, PDO::PARAM_INT);
+            // Recebe os dados de uma Ticket que foram setados no TicketsController
+            $idTicket = $Tickets->getIdTicket();
 
-                // Executa uma instrução preparada e se e instrução for executada com sucesso exibe a mensagem na tela e redireciona para a página de listagem de Tickets
-                if ($stmt->execute()) {
-                    echo 
-                        "<script>
+            // Prepara uma instrução SQL para ser executada pelo método PDOStatement :: execute ()
+            $stmt = $this->conn->prepare("DELETE FROM tickets WHERE idTicket = ?");
+
+            // Passa os parâmetros para a instrução SQL
+            $stmt->bindparam(1, $idTicket, PDO::PARAM_INT);
+
+            // Executa uma instrução preparada e se e instrução for executada com sucesso exibe a mensagem na tela e redireciona para a página de listagem de Tickets
+            if ($stmt->execute()) {
+                echo
+                    "<script>
                             alert('Dados da Ticket deletados com sucesso!');
                             window.location.href='../View/ViewListarTickets.php';
                         </script>";
 
                 // Se e instrução não for executada com sucesso exibe a mensagem na tela e redireciona para a página de listagem de Tickets
-                } else {
-                    echo 
-                        "<script>
+            } else {
+                echo
+                    "<script>
                             alert('Erro ao deletar os dados da Ticket!');
                             window.location.href='../View/ViewListarTickets.php';
                         </script>";
-                }
-
-            } catch (PDOException $e) {
-
-                // Caso alguma exceção ou erro, os mesmos serão mostrados na tela
-                echo $e->getMessage();
-
             }
+        } catch (PDOException $e) {
+
+            // Caso alguma exceção ou erro, os mesmos serão mostrados na tela
+            echo $e->getMessage();
         }
-        
     }
+}

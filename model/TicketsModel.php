@@ -3,20 +3,32 @@
 class Tickets
 {
 
-	private $codTicket;
+	private $idTicket;
 	private $titleTicket;
-	private $dateTicket;
+	private $dataTicket;
 	private $descriptionTicket;
 	private $statusTicket;
 
-	public function getCodTicket()
+	public function getIdTicket()
 	{
-		return $this->codTicket;
+		return $this->idTicket;
 	}
 
-	public function setCodTicket($codTicket)
+	public function setIdTicket($idTicket)
 	{
-		$this->codTicket = $codTicket;
+		$this->idTicket = $idTicket;
+
+		return $this;
+	}
+
+	public function getIdUser()
+	{
+		return $this->idUser;
+	}
+
+	public function setIdUser($idUser)
+	{
+		$this->idUser = $idUser;
 
 		return $this;
 	}
@@ -33,14 +45,14 @@ class Tickets
 		return $this;
 	}
 
-	public function getDateTicket()
+	public function getDataTicket()
 	{
-		return $this->dateTicket;
+		return $this->dataTicket;
 	}
 
-	public function setDateTicket($dateTicket)
+	public function setDataTicket($dataTicket)
 	{
-		$this->dateTicket = $dateTicket;
+		$this->dataTicket = $dataTicket;
 
 		return $this;
 	}

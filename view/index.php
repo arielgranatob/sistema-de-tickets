@@ -1,40 +1,42 @@
+<?php
+
+date_default_timezone_set('America/Sao_Paulo');
+$timestamp = date('Y-m-d H:i:s');
+
+
+?>
 <!doctype html>
 <html lang="pt-br">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
     <title>Sistema de tickets para atendimento de demandas</title>
 </head>
 
 <body class="mx-auto" style="width: 800px; margin: 100px;">
     <form action="../controller/TicketsController.php" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="acao" value="adicionar">
+        <input type="hidden" name="idUser" value="0">
+        <input type="hidden" name="dataTicket" value="<?= $timestamp; ?>">
         <div class="form-row">
-            <div class="form-group col-md-8">
+            <div class="form-group col-md-9">
                 <label for="titulo">Título</label>
                 <input type="text" class="form-control" name="titleTicket" placeholder="Título">
             </div>
-            <div class="form-group col-md-4">
-                <label for="date">Data</label>
-                <input type="text" class="form-control" name="dateTicket" value="13/04/20">
+            <div class="form-group col-md-3">
+                <label for="status">Status</label>
+                <select class="form-control" name="statusTicket">
+                    <option>0</option>
+                    <option>1</option>
+                </select>
             </div>
-
             <div class="form-group col-md-12">
                 <textarea class="form-control" name="descriptionTicket" rows="3" placeholder="Descrição"></textarea>
             </div>
-            <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" name="enableTicket" class="custom-control-input" checked>
-                <label class="custom-control-label">Ativo</label>
-            </div>
-            <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" name="disableTicket" class="custom-control-input">
-                <label class="custom-control-label">Desativo</label>
-            </div>
             <button type="submit" class="btn btn-primary">Cadastrar</button>
+
     </form>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

@@ -1,116 +1,122 @@
 <?php
-    
-    // Recebe a ação desejada pelo usuario
-    $acao = $_POST["acao"];
 
-    switch ($acao) {
-        case 'adicionar':
-            // Faz a chamada da função
-            addTicket();
-            break;
-        case 'editar':
-            // Faz a chamada da função
-            editarTicket();
-            break;
-        case 'excluir':        
-            // Faz a chamada da função
-            excluirTicket();
-            break;
-    }
+// Recebe a ação desejada pelo usuario
+$acao = $_POST["acao"];
 
-    // Função para adicionar Ticket
-    function addTicket() {
+switch ($acao) {
+    case 'adicionar':
+        // Faz a chamada da função
+        addTicket();
+        break;
+    case 'editar':
+        // Faz a chamada da função
+        editarTicket();
+        break;
+    case 'excluir':
+        // Faz a chamada da função
+        excluirTicket();
+        break;
+}
 
-        // Inclue os arquivos necessários
-        require_once ('../model/TicketsModel.php');
-        require_once ('../dao/TicketsDAO.php');
-        require_once ('../database/Database.php');
-        require_once ("../controller/Util.php");
+// Função para adicionar Ticket
+function addTicket()
+{
+    // Inclue os arquivos necessários
+    require_once('../model/TicketsModel.php');
+    require_once('../dao/TicketsDAO.php');
+    require_once('../database/Database.php');
+    require_once("../controller/Util.php");
 
-        //Cria uma nova instância da classe Util
-        $Util = new Util();
+    //Cria uma nova instância da classe Util
+    $Util = new Util();
 
-        //Cria uma nova instância da classe Database
-        $db = new Database();
+    //Cria uma nova instância da classe Database
+    $db = new Database();
 
-        //Cria uma nova instância da classe TicketsDAO
-        $dao = new TicketsDAO($db);
+    //Cria uma nova instância da classe TicketsDAO
+    $dao = new TicketsDAO($db);
 
-        //Obtém os dados do formulário de cadastro
-        $titleTicket = $_POST['titleTicket'];
-        $descriptionTicket = $_POST['descriptionTicket'];
-        $statusTicket = $_POST['statusTicket'];
-        $dateTicket = $_POST['dateTicket'];
+    //Obtém os dados do formulário de cadastro
+    $titleTicket = $_POST['titleTicket'];
+    $descriptionTicket = $_POST['descriptionTicket'];
+    $statusTicket = $_POST['statusTicket'];
+    $dataTicket = $_POST['dataTicket'];
+    $idUser = $_POST['idUser'];
 
-        // Instancia um novo objeto do tipo Ticket e seta os dados
-        $Tickets = new Tickets();
-        $Tickets->setTitleTicket($titleTicket);
-        $Tickets->setDescriptionTicket($descriptionTicket);
-        $Tickets->setStatusTicket($statusTicket);
-        $Tickets->setDateTicket($dateTicket);
+    // Instancia um novo objeto do tipo Ticket e seta os dados
+    $Tickets = new Tickets();
+    $Tickets->setTitleTicket($titleTicket);
+    $Tickets->setDescriptionTicket($descriptionTicket);
+    $Tickets->setStatusTicket($statusTicket);
+    $Tickets->setDataTicket($dataTicket);
+    $Tickets->setIdUser($idUser);
 
-        // Passa o obejto Ticket para a função add no TicketsDAO
-        $dao->add($Tickets);
-    }
+    // Passa o obejto Ticket para a função add no TicketsDAO
+    $dao->add($Tickets);
+}
 
-    // Função para editar Ticket
-    function editarTicket() {
+// Função para editar Ticket
+function editarTicket()
+{
 
-        // Inclue os arquivos necessários
-        require_once ('../model/TicketsModel.php');
-        require_once ('../dao/TicketsDAO.php');
-        require_once ('../database/Database.php');
-        require_once ("../controller/Util.php");
-        
-        //Cria uma nova instância da classe Util
-        $Util = new Util();
+    // Inclue os arquivos necessários
+    require_once('../model/TicketsModel.php');
+    require_once('../dao/TicketsDAO.php');
+    require_once('../database/Database.php');
+    require_once("../controller/Util.php");
 
-        //Cria uma nova instância da classe Database
-        $db = new Database();
+    //Cria uma nova instância da classe Util
+    $Util = new Util();
 
-        //Cria uma nova instância da classe TicketsDAO
-        $dao = new TicketsDAO($db);
+    //Cria uma nova instância da classe Database
+    $db = new Database();
 
-        //Obtém os dados do formulário de edição
-        $codTicket = $_POST['codTicket'];
-        $titleTicket = $_POST['titleTicket'];
-        $descriptionTicket = $_POST['descriptionTicket'];
-        $statusTicket = $_POST['statusTicket'];
-        $dateTicket = $_POST['dateTicket'];
+    //Cria uma nova instância da classe TicketsDAO
+    $dao = new TicketsDAO($db);
 
-        // Instancia um novo objeto do tipo Ticket e seta os dados
-        $Tickets = new Tickets();
-        $Tickets->setCodTicket($codTicket);
-        $Tickets->setTitleTicket($titleTicket);
-        $Tickets->setDescriptionTicket($descriptionTicket);
-        $Tickets->setStatusTicket($statusTicket);
-        $Tickets->setDateTicket($dateTicket);
+    //Obtém os dados do formulário de edição
+    $idTicket = $_POST['idTicket'];
+    $titleTicket = $_POST['titleTicket'];
+    $descriptionTicket = $_POST['descriptionTicket'];
+    $statusTicket = $_POST['statusTicket'];
+    $dataTicket = $_POST['dataTicket'];
+    $idUser = $_POST['idUser'];
 
-        // Passa o obejto Ticket para a função update no TicketsDAO
-        $dao->update($Tickets);
-    }
+    // Instancia um novo objeto do tipo Ticket e seta os dados
+    $Tickets = new Tickets();
+    $Tickets->setIdTicket($idTicket);
+    $Tickets->setTitleTicket($titleTicket);
+    $Tickets->setDescriptionTicket($descriptionTicket);
+    $Tickets->setStatusTicket($statusTicket);
+    $Tickets->setDataTicket($dataTicket);
+    $Tickets->setIdUser($idUser);
 
-    // Função para excluir Ticket
-    function excluirTicket() {
+    // Passa o obejto Ticket para a função update no TicketsDAO
+    $dao->update($Tickets);
+}
 
-        // Inclue os arquivos necessários
-        require_once ('../model/TicketsModel.php');
-        require_once ('../dao/TicketsDAO.php');
-        require_once ('../database/Database.php');
+// Função para excluir Ticket
+function excluirTicket()
+{
 
-        //Cria uma nova instância da classe Database
-        $db = new Database();
+    // Inclue os arquivos necessários
+    require_once('../model/TicketsModel.php');
+    require_once('../dao/TicketsDAO.php');
+    require_once('../database/Database.php');
 
-        //Cria uma nova instância da classe TicketsDAO
-        $dao = new TicketsDAO($db);
+    //Cria uma nova instância da classe Database
+    $db = new Database();
 
-        //Obtém os dados para exclusão
-        $codTicket = $_POST['codTicket'];
+    //Cria uma nova instância da classe TicketsDAO
+    $dao = new TicketsDAO($db);
 
-        // Instancia um novo objeto do tipo Ticket e seta os dados
-        $Tickets = new Tickets();
-        $Tickets->setCodTicket($codTicket);
+    //Obtém os dados para exclusão
+    $idTicket = $_POST['idTicket'];
 
-        // Passa o obejto Ticket para a função delete no TicketsDAO
-        $dao->delete($Tickets);
-    }
+    // Instancia um novo objeto do tipo Ticket e seta os dados
+    $Tickets = new Tickets();
+    $Tickets->setIdTicket($idTicket);
+
+    // Passa o obejto Ticket para a função delete no TicketsDAO
+    $dao->delete($Tickets);
+}

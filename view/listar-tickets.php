@@ -30,7 +30,7 @@ $stmtTickets->execute();
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
 
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="https://ide.jquery.com/jquery-3.3.1.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
     <script>
         $(document).ready(function() {
@@ -42,11 +42,15 @@ $stmtTickets->execute();
 
 <body class="mx-auto" style="width: 800px; margin: 100px;">
 
-    <table id="tableTickets" class="table display">
+    <table id="tableTickets" class="table display mx-auto">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">Código</th>
                 <th scope="col">Título</th>
+                <th scope="col">Descrição</th>
+
+                <th scope="col">Data da criação</th>
+                <th scope="col">Status</th>
                 <th scope="col">Ação</th>
 
             </tr>
@@ -55,12 +59,19 @@ $stmtTickets->execute();
             <?php
             //Retorna uma matriz indexada pelo nome da coluna conforme resultado retornado pela execução da instrução SQL
             while ($RowTickets = $stmtTickets->fetch(PDO::FETCH_ASSOC)) {
+
+                if ($RowTickets["statusTicket"]) $statusTicket = "Ativado";
+                else $statusTicket = "Desativado";
+
                 echo '                  <tr>
-											<td>' . $RowTickets["codTicket"] . '</td>
+											<td>' . $RowTickets["idTicket"] . '</td>
 											<td>' . $RowTickets["titleTicket"] . '</td>
+											<td>' . $RowTickets["descriptionTicket"] . '</td>
+											<td>' . $RowTickets["dataTicket"] . '</td>
+											<td>' . $statusTicket . '</td>
 											<td>
-												<a class="btn btn-primary" href="ViewFormEditarTicket.php?codTicket=' . $RowTickets["codTicket"] . '">Editar</a>
-												<a class="btn btn-danger" href="ViewFormExcluirTicket.php?codTicket=' . $RowTickets["codTicket"] . '">Excluir</a>
+												<a class="btn btn-primary" href="ViewFormEditarTicket.php?idTicket=' . $RowTickets["idTicket"] . '">Editar</a>
+												<a class="btn btn-danger" href="ViewFormExcluirTicket.php?idTicket=' . $RowTickets["idTicket"] . '">Excluir</a>
 											</td>
 										</tr>';
             }

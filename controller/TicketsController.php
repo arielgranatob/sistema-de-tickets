@@ -43,9 +43,6 @@ function addTicket()
     $idUser = $_POST['idUser'];
     $dataTicket = $_POST['dataTicket'];
 
-    if ($statusTicket == "Ativado") $statusTicket = 1;
-    if ($statusTicket == "Desativado") $statusTicket = 0;
-
     // Instancia um novo objeto do tipo Ticket e seta os dados
     $Tickets = new Tickets();
     $Tickets->setTitleTicket($titleTicket);
@@ -61,7 +58,6 @@ function addTicket()
 // Função para editar Ticket
 function editarTicket()
 {
-
     // Inclue os arquivos necessários
     require_once('../model/TicketsModel.php');
     require_once('../dao/TicketsDAO.php');
@@ -84,9 +80,6 @@ function editarTicket()
     $statusTicket = $_POST['statusTicket'];
     $dataTicket = $_POST['dataTicket'];
     $idUser = $_POST['idUser'];
-
-    if ($statusTicket == "Ativado") $statusTicket = 1;
-    if ($statusTicket == "Desativado") $statusTicket = 0;
 
     // Instancia um novo objeto do tipo Ticket e seta os dados
     $Tickets = new Tickets();

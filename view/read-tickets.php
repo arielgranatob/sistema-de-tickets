@@ -61,20 +61,21 @@ $stmtTickets->execute();
                 if ($RowTickets["statusTicket"]) $statusTicket = "Ativado";
                 else $statusTicket = "Desativado";
 
-                echo '                  <tr>
-											<td>' . $RowTickets["idTicket"] . '</td>
-											<td>' . $RowTickets["titleTicket"] . '</td>
-											<td>' . $RowTickets["descriptionTicket"] . '</td>
-											<td>' . $RowTickets["dataTicket"] . '</td>
-											<td>' . $statusTicket . '</td>
-											<td>
-												<a class="btn btn-primary" href="update-ticket.php?idTicket=' . $RowTickets["idTicket"] . '">Editar</a>
-												<a class="btn btn-danger" href="delete-ticket.php?idTicket=' . $RowTickets["idTicket"] . '">Excluir</a>
-											</td>
-										</tr>';
+                echo '<tr>
+						<td>' . $RowTickets["idTicket"] . '</td>
+						<td>' . $RowTickets["titleTicket"] . '</td>
+						<td>' . $RowTickets["descriptionTicket"] . '</td>
+						<td>' . $RowTickets["dataTicket"] . '</td>
+						<td>' . $statusTicket . '</td>
+						<td>
+						    <a class="btn btn-primary" href="update-ticket.php?idTicket=' . $RowTickets["idTicket"] . '">Editar</a>
+						    <a class="btn btn-danger" href="delete-ticket.php?idTicket=' . $RowTickets["idTicket"] . '">Excluir</a>
+						</td>
+					</tr>';
             }
             ?>
         </tbody>
     </table>
 </body>
+
 </html>

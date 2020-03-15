@@ -1,10 +1,8 @@
 <?php
-
 date_default_timezone_set('America/Sao_Paulo');
 $timestamp = date('Y-m-d H:i:s');
-
-
 ?>
+
 <!doctype html>
 <html lang="pt-br">
 
@@ -12,6 +10,7 @@ $timestamp = date('Y-m-d H:i:s');
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/x-icon" href='../assets/favicon.ico'>
     <title>Sistema de tickets para atendimento de demandas</title>
 </head>
 
@@ -28,15 +27,14 @@ $timestamp = date('Y-m-d H:i:s');
             <div class="form-group col-md-3">
                 <label for="status">Status</label>
                 <select class="form-control" name="statusTicket">
-                    <option>Ativado</option>
-                    <option>Desativado</option>
+                    <option value="1">Ativado</option>
+                    <option value="0">Desativado</option>
                 </select>
             </div>
             <div class="form-group col-md-12">
                 <textarea class="form-control" name="descriptionTicket" rows="3" placeholder="Descrição"></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Cadastrar</button>
-
     </form>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

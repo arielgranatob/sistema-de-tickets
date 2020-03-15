@@ -15,11 +15,21 @@ $stmtTickets->execute();
 //Retorna uma matriz indexada pelo nome da coluna conforme resultado retornado pela execução da instrução SQL
 $RowTickets = $stmtTickets->fetch(PDO::FETCH_ASSOC);
 
+//Data e hora selecionada de SP
 date_default_timezone_set('America/Sao_Paulo');
+
+//Timestamp para data
 $timestamp = date('Y-m-d H:i:s');
 
 
+//Inicializa a variável para evitar erros futuros
+$selected = "";
+
+//Se o status não for 1 passa a string selected para a variavel
+if (!$RowTickets["statusTicket"]) $selected = "selected";
+
 ?>
+
 <!doctype html>
 <html lang="pt-br">
 
@@ -33,28 +43,30 @@ $timestamp = date('Y-m-d H:i:s');
 <body class="mx-auto" style="width: 800px; margin: 100px;">
 	<form action="../controller/TicketsController.php" method="POST" enctype="multipart/form-data">
 		<input type="hidden" name="acao" value="editar">
-		<input type="hidden" name="idTicket" value="<?= $RowTickets['idTicket'] ?>">
+		<input type="hidden" name="idTicket" value="<?= $_GET['idTicket']; ?>">
 		<input type="hidden" name="dataTicket" value="<?= $timestamp; ?>">
+		<input type="hidden" name="idUser" value="0">
+
 		<div class="form-row">
-			<div class="form-group col-md-7">
+			<div class="form-group col-md-6">
 				<label for="titulo">Título</label>
-				<input type="text" class="form-control" name="titleTicket" value="<?= $RowTickets['titleTicket'] ?>">
+				<input type="text" class="form-control" name="titleTicket" value="<?= $RowTickets['titleTicket']; ?>">
 			</div>
 			<div class="form-group col-md-3">
 				<label for="data">Data de criação</label>
-				<input type="text" class="form-control" name="titleTicket" value="<?= $RowTickets['dataTicket'] ?>" disabled title="Você não pode alterar a data de criação de um documento!">
+				<input type="text" class="form-control" name="dataTicket" value="<?= $RowTickets['dataTicket']; ?>" disabled title="Você não pode alterar a data de criação de um documento!">
 			</div>
-			<div class="form-group col-md-2">
+			<div class="form-group col-md-3">
 				<label for="status">Status</label>
 				<select class="form-control" name="statusTicket">
-					<option>Ativado</option>
-					<option>Desativado</option>
+					<option value="1">Ativado</option>
+					<option value="0" <?= $selected; ?>>Desativado</option>
 				</select>
 			</div>
 			<div class="form-group col-md-12">
-				<textarea class="form-control" name="descriptionTicket" rows="3"><?= $RowTickets['titleTicket'] ?></textarea>
+				<textarea class="form-control" name="descriptionTicket" rows="3"><?= $RowTickets['descriptionTicket']; ?></textarea>
 			</div>
-			<button type="submit" class="btn btn-primary">Cadastrar</button>
+			<button type="submit" class="btn btn-primary">Atualizar</button>
 
 	</form>
 

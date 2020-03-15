@@ -28,8 +28,8 @@ $timestamp = date('Y-m-d H:i:s');
             <div class="form-group col-md-3">
                 <label for="status">Status</label>
                 <select class="form-control" name="statusTicket">
-                    <option>0</option>
-                    <option>1</option>
+                    <option>Ativado</option>
+                    <option>Desativado</option>
                 </select>
             </div>
             <div class="form-group col-md-12">

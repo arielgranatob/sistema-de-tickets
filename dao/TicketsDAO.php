@@ -18,7 +18,6 @@ class TicketsDAO
     // Função para executar instruções SQL desejadas
     public function runQuery($sql)
     {
-
         // Prepara uma instrução SQL para ser executada pelo método PDOStatement :: execute ()
         $stmt = $this->conn->prepare($sql);
         return $stmt;
@@ -35,7 +34,6 @@ class TicketsDAO
             $statusTicket = $Tickets->getStatusTicket();
             $idUser = $Tickets->getIdUser();
 
-
             // Prepara uma instrução SQL para ser executada pelo método PDOStatement :: execute ()
             $stmt = $this->conn->prepare("INSERT INTO tickets (titleTicket, dataTicket, descriptionTicket, statusTicket, idUser) VALUES(:titleTicket, :dataTicket, :descriptionTicket, :statusTicket, :idUser)");
 
@@ -46,21 +44,19 @@ class TicketsDAO
             $stmt->bindparam(":statusTicket", $statusTicket, PDO::PARAM_STR);
             $stmt->bindparam(":idUser", $idUser, PDO::PARAM_STR);
 
-
             // Executa uma instrução preparada e se e instrução for executada com sucesso exibe a mensagem na tela e redireciona para a página de listagem de Tickets
             if ($stmt->execute()) {
                 echo
                     "<script>
-                            alert('Ticket cadastrado com sucesso!');
-                            window.location.href='../view/listar-tickets.php';
+                            window.location.href='../view/read-tickets.php';
                         </script>";
 
                 // Se e instrução não for executada com sucesso exibe a mensagem na tela e redireciona para a página de listagem de Tickets
             } else {
                 echo
                     "<script>
-                            alert('Erro ao cadastrar a Ticket!');
-                            window.location.href='../View/ViewListarTickets.php';
+                            alert('Erro ao cadastrar a ticket!');
+                            window.location.href='../view/read-tickets.php';
                         </script>";
             }
         } catch (PDOException $e) {
@@ -74,7 +70,6 @@ class TicketsDAO
     public function update(Tickets $Tickets)
     {
         try {
-
             // Recebe os dados de uma Ticket que foram setados no TicketsController
             $idTicket = $Tickets->getIdTicket();
             $titleTicket = $Tickets->getTitleTicket();
@@ -97,16 +92,15 @@ class TicketsDAO
             if ($stmt->execute()) {
                 echo
                     "<script>
-                            alert('Dados da Ticket alterados com sucesso!');
-                            window.location.href='../View/ViewListarTickets.php';
+                            window.location.href='../view/read-tickets.php';
                         </script>";
 
                 // Se e instrução não for executada com sucesso exibe a mensagem na tela e redireciona para a página de listagem de Tickets
             } else {
                 echo
                     "<script>
-                            alert('Erro ao alterar dos dados da Ticket!');
-                            window.location.href='../View/ViewListarTickets.php';
+                            alert('Erro ao alterar dos dados da ticket!');
+                            window.location.href='../view/read-tickets.php';
                         </script>";
             }
         } catch (PDOException $e) {
@@ -134,20 +128,18 @@ class TicketsDAO
             if ($stmt->execute()) {
                 echo
                     "<script>
-                            alert('Dados da Ticket deletados com sucesso!');
-                            window.location.href='../View/ViewListarTickets.php';
+                            window.location.href='../view/read-tickets.php';
                         </script>";
 
                 // Se e instrução não for executada com sucesso exibe a mensagem na tela e redireciona para a página de listagem de Tickets
             } else {
                 echo
                     "<script>
-                            alert('Erro ao deletar os dados da Ticket!');
-                            window.location.href='../View/ViewListarTickets.php';
+                            alert('Erro ao deletar ticket!');
+                            window.location.href='../view/read-tickets.php';
                         </script>";
             }
         } catch (PDOException $e) {
-
             // Caso alguma exceção ou erro, os mesmos serão mostrados na tela
             echo $e->getMessage();
         }

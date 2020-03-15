@@ -30,7 +30,7 @@ $stmtTickets->execute();
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
 
-    <script type="text/javascript" src="https://ide.jquery.com/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
     <script>
         $(document).ready(function() {
@@ -40,19 +40,17 @@ $stmtTickets->execute();
     <title>Sistema de tickets para atendimento de demandas</title>
 </head>
 
-<body class="mx-auto" style="width: 800px; margin: 100px;">
+<body class="mx-auto" style="width: 90%; margin: 100px;">
 
-    <table id="tableTickets" class="table display mx-auto">
+    <table id="tableTickets" class="table display">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">Código</th>
                 <th scope="col">Título</th>
                 <th scope="col">Descrição</th>
-
                 <th scope="col">Data da criação</th>
                 <th scope="col">Status</th>
                 <th scope="col">Ação</th>
-
             </tr>
         </thead>
         <tbody>
@@ -70,8 +68,8 @@ $stmtTickets->execute();
 											<td>' . $RowTickets["dataTicket"] . '</td>
 											<td>' . $statusTicket . '</td>
 											<td>
-												<a class="btn btn-primary" href="ViewFormEditarTicket.php?idTicket=' . $RowTickets["idTicket"] . '">Editar</a>
-												<a class="btn btn-danger" href="ViewFormExcluirTicket.php?idTicket=' . $RowTickets["idTicket"] . '">Excluir</a>
+												<a class="btn btn-primary" href="update-ticket.php?idTicket=' . $RowTickets["idTicket"] . '">Editar</a>
+												<a class="btn btn-danger" href="delete-ticket.php?idTicket=' . $RowTickets["idTicket"] . '">Excluir</a>
 											</td>
 										</tr>';
             }
@@ -79,5 +77,4 @@ $stmtTickets->execute();
         </tbody>
     </table>
 </body>
-
 </html>

@@ -40,8 +40,11 @@ function addTicket()
     $titleTicket = $_POST['titleTicket'];
     $descriptionTicket = $_POST['descriptionTicket'];
     $statusTicket = $_POST['statusTicket'];
-    $dataTicket = $_POST['dataTicket'];
     $idUser = $_POST['idUser'];
+    $dataTicket = $_POST['dataTicket'];
+
+    if ($statusTicket == "Ativado") $statusTicket = 1;
+    if ($statusTicket == "Desativado") $statusTicket = 0;
 
     // Instancia um novo objeto do tipo Ticket e seta os dados
     $Tickets = new Tickets();
@@ -81,6 +84,9 @@ function editarTicket()
     $statusTicket = $_POST['statusTicket'];
     $dataTicket = $_POST['dataTicket'];
     $idUser = $_POST['idUser'];
+
+    if ($statusTicket == "Ativado") $statusTicket = 1;
+    if ($statusTicket == "Desativado") $statusTicket = 0;
 
     // Instancia um novo objeto do tipo Ticket e seta os dados
     $Tickets = new Tickets();

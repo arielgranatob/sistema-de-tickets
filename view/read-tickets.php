@@ -40,8 +40,9 @@ $stmtTickets->execute();
     <title>Sistema de tickets para atendimento de demandas</title>
 </head>
 
-<body class="mx-auto" style="width: 90%; margin: 100px;">
-
+<body class="mx-auto" style="width: 70%; margin: 10px; background-color:seashell;">
+    <p class="h2">Lista de todos os tickets cadastrados</p>
+    <a class="btn btn-primary float-right" href="insert-ticket.php" role="button" style="margin-bottom: 30px">Novo ticket</a>
     <table id="tableTickets" class="table display">
         <thead class="thead-dark">
             <tr>

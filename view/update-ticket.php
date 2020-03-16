@@ -15,13 +15,6 @@ $stmtTickets->execute();
 //Retorna uma matriz indexada pelo nome da coluna conforme resultado retornado pela execução da instrução SQL
 $RowTickets = $stmtTickets->fetch(PDO::FETCH_ASSOC);
 
-//Data e hora selecionada de SP
-date_default_timezone_set('America/Sao_Paulo');
-
-//Timestamp para data
-$timestamp = date('Y-m-d H:i:s');
-
-
 //Inicializa a variável para evitar erros futuros
 $selected = "";
 
@@ -41,20 +34,16 @@ if (!$RowTickets["statusTicket"]) $selected = "selected";
 </head>
 
 <body class="mx-auto" style="width: 800px; margin: 100px;">
+<a class="btn btn-primary" href="read-tickets.php" role="button">Listar</a>
 	<form action="../controller/TicketsController.php" method="POST" enctype="multipart/form-data">
 		<input type="hidden" name="acao" value="editar">
 		<input type="hidden" name="idTicket" value="<?= $_GET['idTicket']; ?>">
-		<input type="hidden" name="dataTicket" value="<?= $timestamp; ?>">
 		<input type="hidden" name="idUser" value="0">
 
 		<div class="form-row">
-			<div class="form-group col-md-6">
+			<div class="form-group col-md-9">
 				<label for="titulo">Título</label>
 				<input type="text" class="form-control" name="titleTicket" value="<?= $RowTickets['titleTicket']; ?>">
-			</div>
-			<div class="form-group col-md-3">
-				<label for="data">Data de criação</label>
-				<input type="text" class="form-control" name="dataTicket" value="<?= $RowTickets['dataTicket']; ?>" disabled title="Você não pode alterar a data de criação de um documento!">
 			</div>
 			<div class="form-group col-md-3">
 				<label for="status">Status</label>

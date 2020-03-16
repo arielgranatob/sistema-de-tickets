@@ -78,7 +78,6 @@ function editarTicket()
     $titleTicket = $_POST['titleTicket'];
     $descriptionTicket = $_POST['descriptionTicket'];
     $statusTicket = $_POST['statusTicket'];
-    $dataTicket = $_POST['dataTicket'];
     $idUser = $_POST['idUser'];
 
     // Instancia um novo objeto do tipo Ticket e seta os dados
@@ -87,7 +86,6 @@ function editarTicket()
     $Tickets->setTitleTicket($titleTicket);
     $Tickets->setDescriptionTicket($descriptionTicket);
     $Tickets->setStatusTicket($statusTicket);
-    $Tickets->setDataTicket($dataTicket);
     $Tickets->setIdUser($idUser);
 
     // Passa o obejto Ticket para a função update no TicketsDAO

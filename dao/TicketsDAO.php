@@ -74,20 +74,18 @@ class TicketsDAO
             $idTicket = $Tickets->getIdTicket();
             $titleTicket = $Tickets->getTitleTicket();
             $descriptionTicket = $Tickets->getDescriptionTicket();
-            $dataTicket = $Tickets->getDataTicket();
             $statusTicket = $Tickets->getStatusTicket();
             $idUser = $Tickets->getIdUser();
 
             // Prepara uma instrução SQL para ser executada pelo método PDOStatement :: execute ()
-            $stmt = $this->conn->prepare("UPDATE tickets SET titleTicket = ?, descriptionTicket = ?, dataTicket = ?, statusTicket = ?, idUser = ? WHERE idTicket = ?");
+            $stmt = $this->conn->prepare("UPDATE tickets SET titleTicket = ?, descriptionTicket = ?, statusTicket = ?, idUser = ? WHERE idTicket = ?");
 
             // Passa os parâmetros para a instrução SQL
             $stmt->bindparam(1, $titleTicket, PDO::PARAM_STR);
             $stmt->bindparam(2, $descriptionTicket, PDO::PARAM_STR);
-            $stmt->bindparam(3, $dataTicket, PDO::PARAM_STR);
-            $stmt->bindparam(4, $statusTicket, PDO::PARAM_STR);
-            $stmt->bindparam(5, $idUser, PDO::PARAM_INT);
-            $stmt->bindparam(6, $idTicket, PDO::PARAM_INT);
+            $stmt->bindparam(3, $statusTicket, PDO::PARAM_INT);
+            $stmt->bindparam(4, $idUser, PDO::PARAM_INT);
+            $stmt->bindparam(5, $idTicket, PDO::PARAM_INT);
 
             // Executa uma instrução preparada e se e instrução for executada com sucesso exibe a mensagem na tela e redireciona para a página de listagem de Tickets
             if ($stmt->execute()) {

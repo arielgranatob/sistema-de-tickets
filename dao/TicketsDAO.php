@@ -1,6 +1,6 @@
 <?php
 
-require_once('../database/database.php');
+require_once('../database/Database.php');
 
 class TicketsDAO
 {

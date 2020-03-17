@@ -41,8 +41,8 @@ class TicketsDAO
             $stmt->bindparam(":titleTicket", $titleTicket, PDO::PARAM_STR);
             $stmt->bindparam(":descriptionTicket", $descriptionTicket, PDO::PARAM_STR);
             $stmt->bindparam(":dateTicket", $dateTicket, PDO::PARAM_STR);
-            $stmt->bindparam(":statusTicket", $statusTicket, PDO::PARAM_STR);
-            $stmt->bindparam(":idUser", $idUser, PDO::PARAM_STR);
+            $stmt->bindparam(":statusTicket", $statusTicket, PDO::PARAM_INT);
+            $stmt->bindparam(":idUser", $idUser, PDO::PARAM_INT);
 
             // Executa uma instrução preparada e se e instrução for executada com sucesso exibe a mensagem na tela e redireciona para a página de listagem de Tickets
             if ($stmt->execute()) {

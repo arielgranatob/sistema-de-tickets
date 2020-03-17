@@ -39,6 +39,13 @@ function addTicket()
     $idUser = $_POST['idUser'];
     $dateTicket = $_POST['dateTicket'];
 
+    //Verifica se há campos vazios
+    if (empty($titleTicket) || empty($descriptionTicket) || empty($statusTicket))
+        echo "<script>
+        alert('Há campos vazios!');
+        window.location.href='../view/insert-ticket.php';
+        </script>";
+
     // Instancia um novo objeto do tipo Ticket e seta os dados
     $Tickets = new Tickets();
     $Tickets->setTitleTicket($titleTicket);
@@ -71,6 +78,13 @@ function editarTicket()
     $descriptionTicket = $_POST['descriptionTicket'];
     $statusTicket = $_POST['statusTicket'];
     $idUser = $_POST['idUser'];
+
+    //Verifica se há campos vazios
+    if (empty($titleTicket) || empty($descriptionTicket))
+        echo "<script>
+        alert('Há campos vazios!');
+        window.location.href='../view/update-ticket.php?idTicket=" . $idTicket . "';
+        </script>";
 
     // Instancia um novo objeto do tipo Ticket e seta os dados
     $Tickets = new Tickets();

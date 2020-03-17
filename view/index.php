@@ -1,5 +1,14 @@
 <?php
 
+//Se não tiver uma sessão iniciada, ele inicia uma nova
+if (!isset($_SESSION))
+    session_start();
+
+//Se já tiver logado redireciona
+if(!empty($_SESSION['idUser']))
+    header('location:read-tickets.php');
+
+
 //Inclue o arquivo UsersDAO.php 
 require_once("../dao/UsersDAO.php");
 
@@ -11,6 +20,7 @@ $stmtUsers = $UsersDAO->runQuery("SELECT * FROM tickets");
 
 // Executa a instrução SQL
 $stmtUsers->execute();
+
 
 ?>
 

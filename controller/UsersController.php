@@ -15,6 +15,13 @@ $dao = new UsersDAO($db);
 $passUser = $_POST['passUser'];
 $emailUser = $_POST['emailUser'];
 
+//Verifica se email ou senha está vazio
+if (empty($emailUser) || empty($passUser))
+    echo "<script>
+        alert('Há campos vazios!');
+        window.location.href='../view/index.php';
+        </script>";
+
 // Instancia um novo objeto do tipo User e seta os dados
 $Users = new Users();
 $Users->setPassUser($passUser);

@@ -25,10 +25,6 @@ function addTicket()
     require_once('../model/TicketsModel.php');
     require_once('../dao/TicketsDAO.php');
     require_once('../database/Database.php');
-    require_once("../controller/Util.php");
-
-    //Cria uma nova instância da classe Util
-    $Util = new Util();
 
     //Cria uma nova instância da classe Database
     $db = new Database();
@@ -41,14 +37,14 @@ function addTicket()
     $descriptionTicket = $_POST['descriptionTicket'];
     $statusTicket = $_POST['statusTicket'];
     $idUser = $_POST['idUser'];
-    $dataTicket = $_POST['dataTicket'];
+    $dateTicket = $_POST['dateTicket'];
 
     // Instancia um novo objeto do tipo Ticket e seta os dados
     $Tickets = new Tickets();
     $Tickets->setTitleTicket($titleTicket);
     $Tickets->setDescriptionTicket($descriptionTicket);
     $Tickets->setStatusTicket($statusTicket);
-    $Tickets->setDataTicket($dataTicket);
+    $Tickets->setDateTicket($dateTicket);
     $Tickets->setIdUser($idUser);
 
     // Passa o obejto Ticket para a função add no TicketsDAO
@@ -62,10 +58,6 @@ function editarTicket()
     require_once('../model/TicketsModel.php');
     require_once('../dao/TicketsDAO.php');
     require_once('../database/Database.php');
-    require_once("../controller/Util.php");
-
-    //Cria uma nova instância da classe Util
-    $Util = new Util();
 
     //Cria uma nova instância da classe Database
     $db = new Database();
@@ -95,7 +87,6 @@ function editarTicket()
 // Função para excluir Ticket
 function excluirTicket()
 {
-
     // Inclue os arquivos necessários
     require_once('../model/TicketsModel.php');
     require_once('../dao/TicketsDAO.php');

@@ -1,5 +1,13 @@
 <?php
 
+//Se não tiver uma sessão iniciada, ele inicia uma nova
+if (!isset($_SESSION))
+    session_start();
+
+//Se não tiver logado redireciona pro início para realizar o login
+if(!$_SESSION['idUser'])
+    header('location:index.php');
+
 //Inclue o arquivo TicketsDAO.php 
 require_once("../dao/TicketsDAO.php");
 
@@ -27,18 +35,19 @@ if (!$RowTickets["statusTicket"]) $selected = "selected";
 <html lang="pt-br">
 
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<title>Sistema de tickets para atendimento de demandas</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/x-icon" href='../assets/favicon.ico'>
+    <title>Sistema de tickets para atendimento de demandas</title>
 </head>
 
-<body class="mx-auto" style="width: 800px; margin: 100px;">
+<body class="mx-auto" style="width: 70%; margin: 10px; background-color:seashell;">
 <a class="btn btn-primary" href="read-tickets.php" role="button">Listar</a>
 	<form action="../controller/TicketsController.php" method="POST" enctype="multipart/form-data">
 		<input type="hidden" name="acao" value="editar">
 		<input type="hidden" name="idTicket" value="<?= $_GET['idTicket']; ?>">
-		<input type="hidden" name="idUser" value="0">
+		<input type="hidden" name="idUser" value="<?= $_SESSION['idUser']; ?>">
 
 		<div class="form-row">
 			<div class="form-group col-md-9">

@@ -1,11 +1,13 @@
 <?php
 
-//Inclue o arquivo Util.php 
-require_once("../controller/Util.php");
+//Se não tiver uma sessão iniciada, ele inicia uma nova
+if (!isset($_SESSION))
+    session_start();
 
-//Cria uma nova instância da classe Util
-$Util = new Util();
-
+//Se não tiver logado redireciona pro início para realizar o login
+if(!$_SESSION['idUser'])
+    header('location:index.php');
+    
 //Inclue o arquivo TicketsDAO.php 
 require_once("../dao/TicketsDAO.php");
 
@@ -25,6 +27,9 @@ $stmtTickets->execute();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link rel="shortcut icon" type="image/x-icon" href='../assets/favicon.ico'>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -66,7 +71,7 @@ $stmtTickets->execute();
 						<td>' . $RowTickets["idTicket"] . '</td>
 						<td>' . $RowTickets["titleTicket"] . '</td>
 						<td>' . $RowTickets["descriptionTicket"] . '</td>
-						<td>' . $RowTickets["dataTicket"] . '</td>
+						<td>' . $RowTickets["dateTicket"] . '</td>
 						<td>' . $statusTicket . '</td>
 						<td>
 						    <a class="btn btn-primary" href="update-ticket.php?idTicket=' . $RowTickets["idTicket"] . '">Editar</a>

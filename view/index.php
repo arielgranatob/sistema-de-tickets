@@ -1,23 +1,40 @@
+<?php
+
+//Inclue o arquivo UsersDAO.php 
+require_once("../dao/UsersDAO.php");
+
+//Cria uma nova instância da classe UsersDAO
+$UsersDAO = new UsersDAO();
+
+//Chama a função runQuery da classe UsersDAO para executar a instrução SQL
+$stmtUsers = $UsersDAO->runQuery("SELECT * FROM tickets");
+
+// Executa a instrução SQL
+$stmtUsers->execute();
+
+?>
+
 <!doctype html>
 <html lang="pt-br">
 
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<title>Sistema de tickets para atendimento de demandas</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/x-icon" href='../assets/favicon.ico'>
+    <title>Sistema de tickets para atendimento de demandas</title>
 </head>
 
-<body class="mx-auto" style="width: 800px; margin: 100px;">
-	<form action="../controller/TicketsController.php" method="POST" enctype="multipart/form-data">
+<body class="mx-auto" style="width: 70%; margin: 10px; background-color:seashell;">
+	<form action="../controller/UsersController.php" method="POST" enctype="multipart/form-data">
 		<div class="form-group">
 			<label for="exampleInputEmail1">Email</label>
-			<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+			<input type="email" name="emailUser" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
 			<small id="emailHelp" class="form-text text-muted">Endereço de email previamente cadastrado.</small>
 		</div>
 		<div class="form-group">
 			<label for="exampleInputPassword1">Senha</label>
-			<input type="password" class="form-control" id="exampleInputPassword1" required>
+			<input type="password" name="passUser" class="form-control" id="exampleInputPassword1" required>
 		</div>
 		<button type="submit" class="btn btn-primary">Submit</button>
 	</form>

@@ -5,7 +5,7 @@ class Tickets
 
 	private $idTicket;
 	private $titleTicket;
-	private $dataTicket;
+	private $dateTicket;
 	private $descriptionTicket;
 	private $statusTicket;
 
@@ -45,14 +45,14 @@ class Tickets
 		return $this;
 	}
 
-	public function getDataTicket()
+	public function getDateTicket()
 	{
-		return $this->dataTicket;
+		return $this->dateTicket;
 	}
 
-	public function setDataTicket($dataTicket)
+	public function setDateTicket($dateTicket)
 	{
-		$this->dataTicket = $dataTicket;
+		$this->dateTicket = $dateTicket;
 
 		return $this;
 	}

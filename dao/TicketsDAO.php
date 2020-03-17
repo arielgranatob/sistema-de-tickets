@@ -30,17 +30,17 @@ class TicketsDAO
             // Recebe os dados de um Ticket que foram setados no TicketsController
             $titleTicket = $Tickets->getTitleTicket();
             $descriptionTicket = $Tickets->getDescriptionTicket();
-            $dataTicket = $Tickets->getDataTicket();
+            $dateTicket = $Tickets->getDateTicket();
             $statusTicket = $Tickets->getStatusTicket();
             $idUser = $Tickets->getIdUser();
 
             // Prepara uma instrução SQL para ser executada pelo método PDOStatement :: execute ()
-            $stmt = $this->conn->prepare("INSERT INTO tickets (titleTicket, dataTicket, descriptionTicket, statusTicket, idUser) VALUES(:titleTicket, :dataTicket, :descriptionTicket, :statusTicket, :idUser)");
+            $stmt = $this->conn->prepare("INSERT INTO tickets (titleTicket, dateTicket, descriptionTicket, statusTicket, idUser) VALUES(:titleTicket, :dateTicket, :descriptionTicket, :statusTicket, :idUser)");
 
             // Passa os parâmetros para a instrução SQL
             $stmt->bindparam(":titleTicket", $titleTicket, PDO::PARAM_STR);
             $stmt->bindparam(":descriptionTicket", $descriptionTicket, PDO::PARAM_STR);
-            $stmt->bindparam(":dataTicket", $dataTicket, PDO::PARAM_STR);
+            $stmt->bindparam(":dateTicket", $dateTicket, PDO::PARAM_STR);
             $stmt->bindparam(":statusTicket", $statusTicket, PDO::PARAM_STR);
             $stmt->bindparam(":idUser", $idUser, PDO::PARAM_STR);
 

@@ -1,6 +1,19 @@
 <?php
+
+//Se não tiver uma sessão iniciada, ele inicia uma nova
+if (!isset($_SESSION))
+    session_start();
+
+//Se não tiver logado redireciona pro início para realizar o login
+if(!$_SESSION['idUser'])
+    header('location:index.php');
+
+//Default de data e hora setado como SP
 date_default_timezone_set('America/Sao_Paulo');
+
+//Timestamp de data e horário que será salvo no banco de dados
 $timestamp = date('Y-m-d H:i:s');
+
 ?>
 
 <!doctype html>
@@ -19,8 +32,8 @@ $timestamp = date('Y-m-d H:i:s');
     <a class="btn btn-primary float-right" href="read-tickets.php" role="button">Listar</a>
     <form action="../controller/TicketsController.php" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="acao" value="adicionar">
-        <input type="hidden" name="idUser" value="0">
-        <input type="hidden" name="dataTicket" value="<?= $timestamp; ?>">
+        <input type="hidden" name="idUser" value="<?=  $_SESSION['idUser']; ?>">
+        <input type="hidden" name="dateTicket" value="<?= $timestamp; ?>">
         <div class="form-row">
             <div class="form-group col-md-9">
                 <label for="titulo">Título</label>
